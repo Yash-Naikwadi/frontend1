@@ -115,65 +115,80 @@ const Navbar = () => {
   }, [user]);
 
   return (
-    <nav>
-      <div>🧠 MedLink AI</div>
+    <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm">
+      <div className="flex items-center gap-2 text-2xl font-bold text-primary-600">
+        <span className="text-3xl">🧠</span> MedLink AI
+      </div>
 
-      <div>
+      <div className="flex items-center gap-6">
         {user && (
-          <span>👋 Hello, {user.name}</span>
+          <span className="text-gray-700 font-medium hidden md:inline-block">
+            👋 Hello, <span className="text-primary-600">{user.name}</span>
+          </span>
         )}
 
         {wallet && (
-          <span>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold border border-primary-100">
+            <span className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></span>
             🦊 {wallet.slice(0, 6)}...{wallet.slice(-4)}
-          </span>
+          </div>
         )}
 
         {(userHealthID || mintStatus.tokenId) && (
-          <span>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary-50 text-secondary-700 rounded-full text-sm font-semibold border border-secondary-100">
             🆔 HealthID: #{userHealthID || mintStatus.tokenId}
-          </span>
+          </div>
         )}
 
-        {user ? (
-          <Button
-            variant="outline"
-            onClick={() => {
-              logout();
-              navigate("/");
-            }}
-          >
-            Logout
-          </Button>
-        ) : (
-          <>
-            <Button><Link to="/login">Sign In</Link></Button>
-            <Button variant="secondary"><Link to="/register">Sign Up</Link></Button>
-          </>
-        )}
+        <div className="flex items-center gap-3">
+          {user ? (
+            <Button
+              variant="outline"
+              className="px-4 py-2 text-sm"
+              onClick={() => {
+                logout();
+                navigate("/");
+              }}
+            >
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Link to="/login">
+                <Button className="px-4 py-2 text-sm">Sign In</Button>
+              </Link>
+              <Link to="/register">
+                <Button variant="secondary" className="px-4 py-2 text-sm">Sign Up</Button>
+              </Link>
+            </>
+          )}
 
-        {wallet ? (
-          <Button variant="outline" onClick={handleWalletDisconnect}>
-            Disconnect Wallet
-          </Button>
-        ) : (
-          <Button variant="outline" onClick={handleWalletConnect}>
-            Connect Wallet
-          </Button>
-        )}
+          {wallet ? (
+            <Button variant="outline" className="px-4 py-2 text-sm" onClick={handleWalletDisconnect}>
+              Disconnect Wallet
+            </Button>
+          ) : (
+            <Button variant="outline" className="px-4 py-2 text-sm" onClick={handleWalletConnect}>
+              Connect Wallet
+            </Button>
+          )}
 
-        {wallet && !userHealthID && !mintStatus.success && (
-          <Button 
-            variant="primary" 
-            onClick={handleMintHealthID}
-            disabled={mintStatus.loading}
-          >
-            {mintStatus.loading ? "Minting..." : "Mint HealthID"}
-          </Button>
-        )}
+          {wallet && !userHealthID && !mintStatus.success && (
+            <Button 
+              variant="primary" 
+              className="px-4 py-2 text-sm"
+              onClick={handleMintHealthID}
+              disabled={mintStatus.loading}
+            >
+              {mintStatus.loading ? "Minting..." : "Mint HealthID"}
+            </Button>
+          )}
+        </div>
 
         {mintStatus.error && (
-          <span>{mintStatus.error}</span>
+          <span className="text-danger-500 text-xs font-medium bg-danger-50 px-2 py-1 rounded border border-danger-100">
+            {mintStatus.error}
+          </span>
         )}
       </div>
     </nav>
