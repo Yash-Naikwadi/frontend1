@@ -2,6 +2,19 @@ import React, { useState, useEffect } from "react";
 import { ethers } from 'ethers';
 import axios from 'axios';
 import MedVaultABI from '../abis/MedVaultAbi.json';
+import { 
+  CheckCircle2, 
+  XCircle, 
+  Clock, 
+  User, 
+  Shield, 
+  AlertCircle, 
+  Calendar, 
+  MapPin, 
+  Activity,
+  Loader2
+} from "lucide-react";
+import { Button } from "./button";
 
 export const AccessRequestsPanel = () => {
   const [accessRequests, setAccessRequests] = useState([]);
@@ -337,81 +350,102 @@ export const AccessRequestsPanel = () => {
 
   if (loading) {
     return (
-      <div>
-        <h3>Pending Access Requests</h3>
-        <div>
-          <div>Loading...</div>
-        </div>
+      <div className="flex flex-col items-center justify-center py-20 bg-white rounded-3xl border border-gray-100 shadow-sm">
+        <div className="w-16 h-16 border-4 border-primary-100 border-t-primary-600 rounded-full animate-spin mb-4"></div>
+        <p className="text-lg font-black text-gray-900">Loading requests...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div>
-        <h3>Pending Access Requests</h3>
-        <div>
-          <h3>Error Loading Requests</h3>
-          <p>{error}</p>
-          <button onClick={() => window.location.reload()}>
-            Retry
-          </button>
+      <div className="p-8 bg-danger-50 rounded-3xl border border-danger-100 text-center">
+        <div className="w-16 h-16 bg-white text-danger-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+          <AlertCircle size={32} />
         </div>
+        <h3 className="text-xl font-black text-danger-900">Error Loading Requests</h3>
+        <p className="text-danger-700 font-medium mt-2 mb-6">{error}</p>
+        <Button onClick={() => window.location.reload()} variant="danger">
+          Retry Connection
+        </Button>
       </div>
     );
   }
 
   return (
-    <div>
-      <div>
-        <h3>Pending Access Requests</h3>
-        <span>{accessRequests.length} pending</span>
-      </div>
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-6 duration-700">
+      <header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+        <div className="space-y-3">
+          <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none">Access Requests</h2>
+          <p className="text-gray-500 font-medium text-xl max-w-2xl leading-relaxed">"Your data, your rules." — Manage who can view your medical history with precision.</p>
+        </div>
+        <div className="flex items-center gap-3 px-6 py-3 bg-primary-50 text-primary-700 rounded-[2rem] text-xs font-black border border-primary-100 shadow-sm shadow-primary-50">
+          <Shield size={20} className="text-primary-500" />
+          Data Sovereignty Active
+        </div>
+      </header>
       
       {accessRequests.length > 0 ? (
-        <div>
+        <div className="grid grid-cols-1 gap-8">
           {accessRequests.map((request) => (
-            <div key={request.id}>
-              <div>
-                <div>
-                  <div>
-                    {request.profilePicture ? (
-                      <img src={request.profilePicture} alt={request.doctorName} />
-                    ) : (
-                      <div>👤</div>
-                    )}
+            <div key={request.id} className="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-xl shadow-gray-200/40 hover:shadow-2xl hover:border-primary-100 transition-all duration-500 group relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary-50 rounded-full -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-50 transition-opacity"></div>
+              
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-10 relative z-10">
+                <div className="flex items-center gap-10">
+                  <div className="relative">
+                    <div className="w-28 h-28 bg-gray-50 rounded-[2.5rem] overflow-hidden flex items-center justify-center border-4 border-white shadow-2xl group-hover:scale-105 transition-transform duration-500">
+                      {request.profilePicture ? (
+                        <img src={request.profilePicture} alt={request.doctorName} className="w-full h-full object-cover" />
+                      ) : (
+                        <User size={56} className="text-gray-200" />
+                      )}
+                    </div>
+                    <div className={`absolute -bottom-2 -right-2 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-xl ${
+                      request.urgency === 'high' ? 'bg-danger-500 shadow-danger-200' : 'bg-primary-500 shadow-primary-200'
+                    }`}>
+                      {request.urgency}
+                    </div>
                   </div>
                   
-                  <div>
-                    <div>
-                      <h4>{request.doctorName}</h4>
-                      <span>{request.urgency} priority</span>
+                  <div className="space-y-4">
+                    <h4 className="text-3xl font-black text-gray-900 tracking-tight">{request.doctorName}</h4>
+                    <div className="flex flex-wrap gap-x-8 gap-y-3 text-sm font-black text-gray-400">
+                      <span className="flex items-center gap-3 uppercase tracking-[0.2em] text-[10px]"><Activity size={18} className="text-primary-500" /> {request.specialization}</span>
+                      <span className="flex items-center gap-3 uppercase tracking-[0.2em] text-[10px]"><MapPin size={18} className="text-primary-500" /> {request.hospital}</span>
                     </div>
-                    
-                    <p>📋 {request.specialization}</p>
-                    <p>🏥 {request.hospital}</p>
-                    
-                    <div>
-                      <p>🕐 Requested: {new Date(request.requestDate).toLocaleDateString()} at {new Date(request.requestDate).toLocaleTimeString()}</p>
+                    <div className="flex items-center gap-4 pt-3">
+                      <div className="flex items-center gap-3 px-4 py-2 bg-gray-50 rounded-2xl text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] border border-gray-100">
+                        <Calendar size={14} />
+                        {new Date(request.requestDate).toLocaleDateString()}
+                      </div>
+                      <div className="text-[10px] font-black text-gray-300 uppercase tracking-[0.3em]">
+                        VAULT ID: {request.doctorAddress.slice(0, 10)}...{request.doctorAddress.slice(-4)}
+                      </div>
                     </div>
-                    
-                    <p>Address: {request.doctorAddress.slice(0, 20)}...</p>
                   </div>
                 </div>
                 
-                <div>
-                  {processingAction === request.doctorAddress ? (
-                    <div>
-                      <div>Processing...</div>
-                      <span>Processing...</span>
+                <div className="flex items-center gap-5">
+                      {processingAction === request.doctorAddress ? (
+                    <div className="flex items-center gap-4 px-10 py-5 bg-gray-50 rounded-[2rem] text-gray-400 font-black uppercase tracking-[0.2em] text-[10px] border border-gray-100 shadow-inner">
+                      <Loader2 size={20} className="animate-spin text-primary-500" />
+                      Authenticating...
                     </div>
                   ) : (
-                    <div>
-                      <button onClick={() => handleApproveAccess(request.doctorAddress)}>
-                        ✓ Approve
+                    <div className="flex items-center gap-6">
+                      <button
+                        onClick={() => handleRejectAccess(request.doctorAddress)}
+                        className="p-5 text-gray-300 hover:text-danger-500 hover:bg-danger-50 rounded-[2rem] transition-all active:scale-90 group/btn"
+                        title="Deny Access"
+                      >
+                        <X size={28} className="group-hover/btn:rotate-90 transition-transform duration-300" />
                       </button>
-                      <button onClick={() => handleRejectAccess(request.doctorAddress)}>
-                        ✗ Reject
+                      <button
+                        onClick={() => handleApproveAccess(request.doctorAddress)}
+                        className="px-10 py-5 bg-gray-900 text-white rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:bg-primary-600 shadow-2xl shadow-gray-200 hover:shadow-primary-100 active:scale-95 transition-all flex items-center gap-3"
+                      >
+                        <CheckCircle size={20} className="text-primary-400" /> Grant Access
                       </button>
                     </div>
                   )}
@@ -421,9 +455,12 @@ export const AccessRequestsPanel = () => {
           ))}
         </div>
       ) : (
-        <div>
-          <h3>No pending access requests</h3>
-          <p>When doctors request access to your medical records, they will appear here.</p>
+        <div className="py-32 text-center bg-white rounded-[3rem] border border-dashed border-gray-200 shadow-sm">
+          <div className="w-24 h-24 bg-gray-50 text-gray-200 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
+            <Key size={48} />
+          </div>
+          <p className="text-2xl font-black text-gray-400 tracking-tight">Vault is Locked</p>
+          <p className="text-gray-300 font-bold mt-3 text-lg">No pending requests found in the authorization queue.</p>
         </div>
       )}
     </div>
