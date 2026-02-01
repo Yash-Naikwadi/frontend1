@@ -98,7 +98,7 @@ const MedicalReportAnalyzer = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="space-y-3">
           <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none">Report Analyze</h2>
-          <p className="text-gray-500 font-medium text-xl max-w-2xl leading-relaxed">"Knowledge is power." — Francis Bacon. Extract deep clinical insights from your medical documents with precision AI.</p>
+          <p className="text-gray-500 font-medium text-xl leading-relaxed">"Knowledge is power." — Francis Bacon. Extract deep clinical insights from your medical documents with precision AI.</p>
         </div>
         <div className="flex items-center gap-3 px-6 py-3 bg-secondary-50 text-secondary-700 rounded-[2rem] text-xs font-black border border-secondary-100 shadow-sm shadow-secondary-50">
           <Activity size={20} className="text-secondary-500" />

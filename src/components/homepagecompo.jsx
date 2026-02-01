@@ -47,7 +47,7 @@ export const HeroSection = ({ userType }) => {
       <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] bg-primary-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[500px] h-[500px] bg-secondary-50 rounded-full blur-3xl opacity-60 pointer-events-none"></div>
       
-      <div className="max-w-7xl mx-auto px-6 py-20 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-6 py-5 relative z-10 grid lg:grid-cols-2 gap-16 items-center">
         <div className="space-y-8 animate-in fade-in slide-in-from-left-8 duration-700">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-bold border border-primary-100">
             <Zap size={16} className="text-primary-500" />
@@ -62,7 +62,7 @@ export const HeroSection = ({ userType }) => {
             ))}
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-xl leading-relaxed">
+          <p className="text-xl text-gray-500 leading-relaxed">
             {content.subtitle}
           </p>
 
@@ -158,7 +158,7 @@ export const FeaturesGrid = ({ userType }) => {
     <div className="py-32 bg-gray-50/50">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20">
-          <div className="max-w-2xl space-y-4">
+          <div className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
               {userType === 'patient' ? 'The Future of Personal Health' : 'Next-Gen Clinical Tools'}
             </h2>
@@ -240,7 +240,7 @@ export const CTASection = ({ userType }) => {
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary-400/20 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl"></div>
           
-          <div className="relative z-10 max-w-3xl mx-auto space-y-10">
+          <div className="relative z-10 mx-auto space-y-10">
             <h2 className="text-4xl md:text-6xl font-black leading-tight tracking-tight">
               {userType === 'patient' ? 'Ready to Own Your Health Data?' : 'Elevate Your Medical Practice'}
             </h2>
@@ -251,7 +251,7 @@ export const CTASection = ({ userType }) => {
               }
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              <Button variant="secondary" className="px-12 py-5 text-xl bg-white text-primary-600 hover:bg-primary-50 border-none rounded-2xl shadow-xl">
+              <Button variant="primary" className="px-12 py-5 text-xl bg-gray text-primary-600 hover:bg-white hover:text-black border-none rounded-2xl shadow-xl">
                 {userType === 'patient' ? 'Get Started Now' : 'Request Access'}
               </Button>
               <Button variant="outline" className="px-12 py-5 text-xl border-white/30 text-white hover:bg-white/10 rounded-2xl">

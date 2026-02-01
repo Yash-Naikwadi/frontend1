@@ -150,7 +150,7 @@ const HealthRecordsTab = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="space-y-3">
           <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none">Health Records</h2>
-          <p className="text-gray-500 font-medium text-xl max-w-2xl leading-relaxed">"Your history is your future." — Securely manage your medical legacy on the blockchain.</p>
+          <p className="text-gray-500 font-medium text-xl leading-relaxed">"Your history is your future." — Securely manage your medical legacy on the blockchain.</p>
         </div>
         <Button
           onClick={() => setShowUploadModal(true)}
@@ -234,7 +234,7 @@ const HealthRecordsTab = () => {
 
       {showUploadModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-gray-900/80 backdrop-blur-2xl animate-in fade-in duration-500">
-          <div className="relative bg-white w-full max-w-2xl rounded-[4rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-500 border border-white/20">
+          <div className="relative bg-white w-full rounded-[4rem] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-500 border border-white/20">
             <div className="p-12 border-b border-gray-50 flex items-center justify-between">
               <div className="space-y-2">
                 <h3 className="text-4xl font-black text-gray-900 tracking-tighter">Vault Encryption</h3>

@@ -18,7 +18,7 @@ function Homepage(){
   return (
     <div>
       <Navbar/>
-      <MediChainChatbot/>
+      {/* <MediChainChatbot/> */}
       <HeroSection userType={userType} />
       <FeaturesGrid userType={userType} />
       <StatsSection userType={userType} />

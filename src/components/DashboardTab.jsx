@@ -68,7 +68,7 @@ const DashboardTab = ({ wearableData }) => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="space-y-3">
           <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none">Welcome back, {user?.name || 'User'}! 👋</h2>
-          <p className="text-gray-500 font-medium text-xl max-w-2xl leading-relaxed">"The groundwork of all happiness is health." — Leigh Hunt. Your wellness journey continues here.</p>
+          <p className="text-gray-500 font-medium text-xl leading-relaxed">"The groundwork of all happiness is health." — Leigh Hunt. Your wellness journey continues here.</p>
         </div>
         
         <div className="flex items-center gap-4">
@@ -199,7 +199,7 @@ const DashboardTab = ({ wearableData }) => {
           <div className="bg-gray-900 rounded-[3.5rem] p-10 text-white shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-48 h-48 bg-primary-500/10 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:scale-150 transition-transform duration-1000"></div>
             <div className="relative z-10">
-              <h4 className="text-3xl font-black mb-4 tracking-tighter leading-tight">Need Medical Assistance?</h4>
+              <h4 className="text-3xl text-white mb-4 tracking-tighter leading-tight">Need Medical Assistance?</h4>
               <p className="text-gray-400 text-base font-bold mb-10 leading-relaxed">Our advanced AI health assistant is available 24/7 to answer your clinical queries with precision.</p>
               <button className="w-full py-6 bg-primary-600 text-white text-xs font-black uppercase tracking-[0.2em] rounded-[2rem] hover:bg-primary-500 transition-all shadow-2xl shadow-primary-900/40 active:scale-95">
                 Launch AI Chat

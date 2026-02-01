@@ -122,7 +122,7 @@ const GuardianManagement = () => {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="space-y-3">
           <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none">Guardian Management</h2>
-          <p className="text-gray-500 font-medium text-xl max-w-2xl leading-relaxed">"Trust is the glue of life." — Designate your emergency medical contacts for decentralized safety.</p>
+          <p className="text-gray-500 font-medium text-xl leading-relaxed">"Trust is the glue of life." — Designate your emergency medical contacts for decentralized safety.</p>
         </div>
         <div className="flex items-center gap-3 px-6 py-3 bg-primary-50 text-primary-700 rounded-[2rem] text-xs font-black border border-primary-100 shadow-sm shadow-primary-50">
           <ShieldCheck size={20} className="text-primary-500" />

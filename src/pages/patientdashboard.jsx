@@ -76,7 +76,7 @@ const PatientDashboard = () => {
               <h1 className="text-5xl md:text-6xl font-black text-gray-900 tracking-tighter leading-none">
                 Patient <span className="text-primary-600">Dashboard</span>
               </h1>
-              <p className="text-gray-400 font-bold text-lg md:text-xl max-w-2xl leading-relaxed">
+              <p className="text-gray-400 font-bold text-lg md:text-xl leading-relaxed">
                 "The greatest wealth is health." — Empowering your wellness journey with AI-driven insights and blockchain security.
               </p>
             </div>
@@ -112,7 +112,7 @@ const PatientDashboard = () => {
           <footer className="mt-32 pt-16 border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-8 opacity-40 hover:opacity-100 transition-opacity duration-500">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center text-white font-black text-xs">M</div>
-              <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">© 2026 MediChain Intelligence • Secure • Private • Decentralized</p>
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">© 2026 MedLink Intelligence • Secure • Private • Decentralized</p>
             </div>
             <div className="flex items-center gap-10">
               <a href="#" className="text-[10px] font-black text-gray-400 uppercase tracking-widest hover:text-primary-600 transition-colors">Privacy Protocol</a>

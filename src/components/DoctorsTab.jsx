@@ -181,7 +181,7 @@ const DoctorsTab = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
         <div className="space-y-3">
           <h2 className="text-4xl font-black text-gray-900 tracking-tighter leading-none">Find Doctors</h2>
-          <p className="text-gray-500 font-medium text-xl max-w-2xl leading-relaxed">"The physician should be the minister of nature." — Hippocrates. Connect with top-tier specialists globally.</p>
+          <p className="text-gray-500 font-medium text-xl leading-relaxed">"The physician should be the minister of nature." — Hippocrates. Connect with top-tier specialists globally.</p>
         </div>
         <div className={`px-6 py-3 rounded-[2rem] text-[10px] font-black uppercase tracking-[0.2em] border-2 shadow-sm ${
           isConnected ? 'bg-success-50 text-success-700 border-success-100' : 'bg-danger-50 text-danger-700 border-danger-100'
