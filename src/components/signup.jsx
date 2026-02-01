@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Button from "../components/button.jsx";
 import Navbar from "./Navbar.jsx";
 import { useNavigate, Link } from "react-router-dom";
+import { User, Mail, Lock, Eye, EyeOff, ChevronRight, ChevronLeft, CheckCircle, Shield } from 'lucide-react';
 
 const SignUpForm = ({ onSuccess }) => {
   const [form, setForm] = useState({
@@ -70,88 +70,180 @@ const SignUpForm = ({ onSuccess }) => {
     setStep(1);
   };
 
+  const styles = {
+    container: {
+      minHeight: '100vh',
+      backgroundColor: '#f8fafc',
+      display: 'flex',
+      flexDirection: 'column',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    },
+    wrapper: {
+      flexGrow: 1,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '2rem'
+    },
+    card: {
+      maxWidth: '900px',
+      width: '100%',
+      backgroundColor: '#ffffff',
+      borderRadius: '2rem',
+      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1)',
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'row',
+      border: '1px solid #f1f5f9'
+    },
+    sidebar: {
+      width: '35%',
+      background: 'linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)',
+      padding: '3rem 2rem',
+      color: '#ffffff',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between'
+    },
+    main: {
+      width: '65%',
+      padding: '3rem'
+    },
+    input: {
+      width: '100%',
+      padding: '0.875rem 1rem',
+      backgroundColor: '#f8fafc',
+      border: '1px solid #e2e8f0',
+      borderRadius: '0.75rem',
+      fontSize: '1rem',
+      outline: 'none',
+      boxSizing: 'border-box'
+    },
+    button: {
+      padding: '1rem 1.5rem',
+      borderRadius: '0.75rem',
+      fontWeight: '700',
+      cursor: 'pointer',
+      border: 'none',
+      transition: 'all 0.2s'
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div style={styles.container}>
       <Navbar/>
       
-      <div className="flex-grow flex items-center justify-center p-6">
-        <div className="max-w-4xl w-full bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden flex flex-col md:flex-row">
-          <div className="md:w-1/3 bg-primary-600 p-10 text-white flex flex-col justify-between">
+      <div style={styles.wrapper}>
+        <div style={styles.card}>
+          {/* Sidebar */}
+          <div style={styles.sidebar}>
             <div>
-              <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl mb-6">✓</div>
-              <h1 className="text-3xl font-bold mb-4">Join Our Platform</h1>
-              <p className="text-primary-100">Create your account and connect your wallet to access the future of healthcare.</p>
+              <div style={{
+                width: '48px',
+                height: '48px',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderRadius: '0.75rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '1.5rem'
+              }}>
+                <CheckCircle size={24} color="white" />
+              </div>
+              <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '1rem' }}>Join MedLink</h1>
+              <p style={{ color: '#dbeafe', lineHeight: '1.6' }}>Create your account and connect your wallet to access the future of healthcare.</p>
             </div>
 
-            <div className="space-y-6 mt-12">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center font-bold">1</div>
-                <div className={step === 1 ? "font-bold" : "text-primary-200"}>Personal Info</div>
+            <div style={{ marginTop: '3rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  backgroundColor: step === 1 ? '#ffffff' : 'rgba(255, 255, 255, 0.2)',
+                  color: step === 1 ? '#1d4ed8' : '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: '800'
+                }}>1</div>
+                <span style={{ fontWeight: step === 1 ? '700' : '400' }}>Personal Info</span>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center font-bold">2</div>
-                <div className={step === 2 ? "font-bold" : "text-primary-200"}>Account & Wallet</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '50%',
+                  backgroundColor: step === 2 ? '#ffffff' : 'rgba(255, 255, 255, 0.2)',
+                  color: step === 2 ? '#1d4ed8' : '#ffffff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: '800'
+                }}>2</div>
+                <span style={{ fontWeight: step === 2 ? '700' : '400' }}>Account & Wallet</span>
               </div>
             </div>
 
-            <div className="mt-12 pt-12 border-t border-primary-500">
-              <p className="text-sm text-primary-200">Already have an account?</p>
-              <Link to="/login" className="text-white font-bold hover:underline mt-2 inline-block">Sign In Here</Link>
+            <div style={{ marginTop: 'auto', paddingTop: '2rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)' }}>
+              <p style={{ fontSize: '0.875rem', color: '#dbeafe' }}>Already have an account?</p>
+              <Link to="/login" style={{ color: '#ffffff', fontWeight: '700', textDecoration: 'none', display: 'block', marginTop: '0.5rem' }}>Sign In Here</Link>
             </div>
           </div>
 
-          <div className="md:w-2/3 p-10">
+          {/* Main Content */}
+          <div style={styles.main}>
             {error && (
-              <div className="mb-6 p-4 bg-danger-50 border border-danger-100 text-danger-600 rounded-lg text-sm font-medium">
-                {error}
-              </div>
+              <div style={{
+                padding: '1rem',
+                backgroundColor: '#fef2f2',
+                color: '#dc2626',
+                borderRadius: '0.75rem',
+                marginBottom: '2rem',
+                fontSize: '0.875rem',
+                fontWeight: '600'
+              }}>{error}</div>
             )}
 
-            {step === 1 && (
-              <div className="animate-in fade-in slide-in-from-right-4 duration-300">
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900">Personal Information</h3>
-                  <p className="text-gray-500">Tell us about yourself to get started</p>
-                </div>
+            {step === 1 ? (
+              <div>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.5rem' }}>Personal Information</h2>
+                <p style={{ color: '#64748b', marginBottom: '2rem' }}>Tell us about yourself to get started</p>
 
-                <div className="space-y-6">
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.5rem' }}>Full Name</label>
                     <input
                       type="text"
                       name="name"
-                      required
                       value={form.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all"
+                      style={styles.input}
                       placeholder="Enter your full name"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2">User Type</label>
+                  <div style={{ display: 'flex', gap: '1rem' }}>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.5rem' }}>User Type</label>
                       <select
                         name="usertype"
-                        required
                         value={form.usertype}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all"
+                        style={styles.input}
                       >
                         <option value="">Select Type</option>
                         <option value="Patient">Patient</option>
                         <option value="Doctor">Doctor</option>
                       </select>
                     </div>
-
-                    <div>
-                      <label className="block text-sm font-bold text-gray-700 mb-2">Gender</label>
+                    <div style={{ flex: 1 }}>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.5rem' }}>Gender</label>
                       <select
                         name="gender"
-                        required
                         value={form.gender}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all"
+                        style={styles.input}
                       >
                         <option value="">Select Gender</option>
                         <option value="Male">Male</option>
@@ -161,81 +253,83 @@ const SignUpForm = ({ onSuccess }) => {
                     </div>
                   </div>
 
-                  <Button
+                  <button
                     onClick={nextStep}
-                    className="w-full py-4 mt-8"
                     disabled={!form.name || !form.usertype || !form.gender}
+                    style={{
+                      ...styles.button,
+                      backgroundColor: '#2563eb',
+                      color: '#ffffff',
+                      marginTop: '1rem',
+                      opacity: (!form.name || !form.usertype || !form.gender) ? 0.5 : 1
+                    }}
                   >
-                    Continue to Next Step
-                  </Button>
+                    Continue to Next Step <ChevronRight size={18} style={{ verticalAlign: 'middle', marginLeft: '0.5rem' }} />
+                  </button>
                 </div>
               </div>
-            )}
+            ) : (
+              <div>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '800', marginBottom: '0.5rem' }}>Account & Wallet</h2>
+                <p style={{ color: '#64748b', marginBottom: '2rem' }}>Complete your registration details</p>
 
-            {step === 2 && (
-              <div className="animate-in fade-in slide-in-from-right-4 duration-300">
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gray-900">Account & Wallet</h3>
-                  <p className="text-gray-500">Complete your registration details</p>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                   <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.5rem' }}>Email Address</label>
                     <input
                       type="email"
                       name="email"
-                      required
                       value={form.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all"
-                      placeholder="Enter your email"
+                      style={styles.input}
+                      placeholder="name@example.com"
                     />
                   </div>
 
-                  <div className="relative">
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      required
-                      value={form.password}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all"
-                      placeholder="Create a strong password"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-[38px] text-gray-400 hover:text-primary-600"
-                    >
-                      {showPassword ? "👁️" : "👁️‍🗨️"}
-                    </button>
-                  </div>
-
-                  <div className="p-4 bg-primary-50 rounded-xl border border-primary-100 flex items-start gap-4">
-                    <div className="text-2xl">🔒</div>
-                    <div>
-                      <h4 className="font-bold text-primary-900 text-sm">Wallet Connection</h4>
-                      <p className="text-xs text-primary-700 mt-1">Your MetaMask wallet will be connected during registration to secure your medical data on the blockchain.</p>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '700', marginBottom: '0.5rem' }}>Password</label>
+                    <div style={{ position: 'relative' }}>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        name="password"
+                        value={form.password}
+                        onChange={handleChange}
+                        style={styles.input}
+                        placeholder="••••••••"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer' }}
+                      >
+                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                      </button>
                     </div>
                   </div>
 
-                  <div className="flex gap-4 mt-8">
-                    <Button
-                      variant="outline"
+                  <div style={{ padding: '1rem', backgroundColor: '#eff6ff', borderRadius: '0.75rem', border: '1px solid #dbeafe', display: 'flex', gap: '1rem' }}>
+                    <Shield size={24} color="#2563eb" />
+                    <div>
+                      <h4 style={{ fontSize: '0.875rem', fontWeight: '700', color: '#1e40af', margin: 0 }}>Wallet Connection</h4>
+                      <p style={{ fontSize: '0.75rem', color: '#1e40af', marginTop: '0.25rem' }}>Your MetaMask wallet will be connected to secure your data on the blockchain.</p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                    <button
+                      type="button"
                       onClick={prevStep}
-                      className="flex-1 py-4"
+                      style={{ ...styles.button, backgroundColor: '#f1f5f9', color: '#475569', flex: 1 }}
                     >
-                      Back
-                    </Button>
-                    <Button
+                      <ChevronLeft size={18} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} /> Back
+                    </button>
+                    <button
                       type="submit"
-                      className="flex-[2] py-4"
                       disabled={loading}
+                      style={{ ...styles.button, backgroundColor: '#2563eb', color: '#ffffff', flex: 2, opacity: loading ? 0.7 : 1 }}
                     >
                       {loading ? "Registering..." : "Sign Up with Wallet"}
-                    </Button>
+                    </button>
                   </div>
                 </form>
               </div>

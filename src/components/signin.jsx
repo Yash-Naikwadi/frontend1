@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import Button from "./button.jsx";
 import { AuthContext } from "../context/AuthContext.jsx";
 import axios from "axios";
 import Navbar from "./Navbar.jsx";
+import { Mail, Lock, Eye, EyeOff, AlertCircle, UserCircle } from 'lucide-react';
 
 const SignInForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -28,97 +28,265 @@ const SignInForm = () => {
       navigate("/");
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || "Login failed");
+      setError(err.response?.data?.message || "Login failed. Please check your credentials.");
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: '#f8fafc',
+      display: 'flex',
+      flexDirection: 'column',
+      fontFamily: 'system-ui, -apple-system, sans-serif'
+    }}>
       <Navbar />
       
-      <div className="flex-grow flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-          <div className="p-8 text-center bg-primary-600 text-white">
-            <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">👤</div>
-            <h1 className="text-2xl font-bold">Welcome Back</h1>
-            <p className="text-primary-100 mt-2">Sign in to your account to continue</p>
+      <div style={{
+        flexGrow: 1,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}>
+        <div style={{
+          maxWidth: '450px',
+          width: '100%',
+          backgroundColor: '#ffffff',
+          borderRadius: '1.5rem',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          overflow: 'hidden',
+          border: '1px solid #f1f5f9'
+        }}>
+          {/* Header Section */}
+          <div style={{
+            padding: '2.5rem 2rem',
+            textAlign: 'center',
+            background: 'linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)',
+            color: '#ffffff'
+          }}>
+            <div style={{
+              width: '80px',
+              height: '80px',
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              borderRadius: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1rem auto'
+            }}>
+              <UserCircle size={48} color="white" />
+            </div>
+            <h1 style={{
+              fontSize: '1.875rem',
+              fontWeight: '800',
+              margin: '0',
+              letterSpacing: '-0.025em'
+            }}>Welcome Back</h1>
+            <p style={{
+              fontSize: '1rem',
+              color: '#dbeafe',
+              marginTop: '0.5rem',
+              fontWeight: '500'
+            }}>Sign in to your MedLink AI account</p>
           </div>
 
-          <div className="p-8">
+          {/* Form Section */}
+          <div style={{ padding: '2.5rem' }}>
             {error && (
-              <div className="mb-6 p-4 bg-danger-50 border border-danger-100 text-danger-600 rounded-lg text-sm font-medium flex items-center gap-2">
-                <span>⚠️</span> {error}
+              <div style={{
+                marginBottom: '1.5rem',
+                padding: '1rem',
+                backgroundColor: '#fef2f2',
+                border: '1px solid #fee2e2',
+                color: '#dc2626',
+                borderRadius: '1rem',
+                fontSize: '0.875rem',
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem'
+              }}>
+                <AlertCircle size={20} />
+                <span>{error}</span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
-                  placeholder="Enter your email"
-                />
+            <form onSubmit={handleSubmit}>
+              {/* Email Field */}
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{
+                  display: 'block',
+                  fontSize: '0.875rem',
+                  fontWeight: '700',
+                  color: '#334155',
+                  marginBottom: '0.5rem',
+                  marginLeft: '0.25rem'
+                }}>Email Address</label>
+                <div style={{ position: 'relative' }}>
+                  <div style={{
+                    position: 'absolute',
+                    left: '1rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: '#94a3b8'
+                  }}>
+                    <Mail size={20} />
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    style={{
+                      width: '100%',
+                      padding: '1rem 1rem 1rem 3rem',
+                      backgroundColor: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '1rem',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      boxSizing: 'border-box'
+                    }}
+                    placeholder="name@example.com"
+                  />
+                </div>
               </div>
 
-              <div className="relative">
-                <label className="block text-sm font-bold text-gray-700 mb-2">Password</label>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  required
-                  value={form.password}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
-                  placeholder="Enter your password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-[38px] text-gray-400 hover:text-primary-600 transition-colors"
-                >
-                  {showPassword ? "👁️" : "👁️‍🗨️"}
-                </button>
+              {/* Password Field */}
+              <div style={{ marginBottom: '1.5rem' }}>
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  marginBottom: '0.5rem',
+                  marginLeft: '0.25rem'
+                }}>
+                  <label style={{
+                    fontSize: '0.875rem',
+                    fontWeight: '700',
+                    color: '#334155',
+                    margin: 0
+                  }}>Password</label>
+                  <a href="#" style={{
+                    fontSize: '0.75rem',
+                    fontWeight: '700',
+                    color: '#2563eb',
+                    textDecoration: 'none'
+                  }}>Forgot password?</a>
+                </div>
+                <div style={{ position: 'relative' }}>
+                  <div style={{
+                    position: 'absolute',
+                    left: '1rem',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    color: '#94a3b8'
+                  }}>
+                    <Lock size={20} />
+                  </div>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    required
+                    value={form.password}
+                    onChange={handleChange}
+                    style={{
+                      width: '100%',
+                      padding: '1rem 1rem 1rem 3rem',
+                      backgroundColor: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '1rem',
+                      fontSize: '1rem',
+                      outline: 'none',
+                      boxSizing: 'border-box'
+                    }}
+                    placeholder="••••••••"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={{
+                      position: 'absolute',
+                      right: '1rem',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      background: 'none',
+                      border: 'none',
+                      color: '#94a3b8',
+                      cursor: 'pointer',
+                      padding: '0.25rem'
+                    }}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
               </div>
 
-              <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center gap-2 text-gray-600 cursor-pointer">
-                  <input type="checkbox" className="rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
+              {/* Remember Me */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: '0.875rem',
+                marginBottom: '1.5rem'
+              }}>
+                <label style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  color: '#64748b',
+                  cursor: 'pointer',
+                  fontWeight: '600'
+                }}>
+                  <input type="checkbox" style={{ width: '1.25rem', height: '1.25rem' }} />
                   Remember me
                 </label>
-                <a href="#" className="text-primary-600 font-semibold hover:underline">Forgot password?</a>
               </div>
 
-              <Button
+              {/* Submit Button */}
+              <button
                 type="submit"
-                className="w-full py-4"
                 disabled={isLoading}
+                style={{
+                  width: '100%',
+                  padding: '1rem',
+                  backgroundColor: '#2563eb',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '1rem',
+                  fontSize: '1.125rem',
+                  fontWeight: '700',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  boxShadow: '0 10px 15px -3px rgba(37, 99, 235, 0.2)',
+                  opacity: isLoading ? 0.7 : 1,
+                  transition: 'all 0.2s'
+                }}
               >
-                {isLoading ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Signing In...
-                  </span>
-                ) : "Sign In"}
-              </Button>
+                {isLoading ? "Authenticating..." : "Sign In to MedLink"}
+              </button>
             </form>
 
-            <div className="mt-8 pt-6 border-t border-gray-100 text-center">
-              <p className="text-gray-600">
-                Don't have an account?{" "}
-                <Link to="/register" className="text-primary-600 font-bold hover:underline">
-                  Create Account
-                </Link>
-              </p>
+            {/* Footer */}
+            <div style={{
+              marginTop: '2rem',
+              paddingTop: '1.5rem',
+              borderTop: '1px solid #f1f5f9',
+              textAlign: 'center',
+              color: '#64748b',
+              fontSize: '0.875rem',
+              fontWeight: '500'
+            }}>
+              Don't have an account?{" "}
+              <Link to="/register" style={{
+                color: '#2563eb',
+                fontWeight: '700',
+                textDecoration: 'none'
+              }}>
+                Create an account
+              </Link>
             </div>
           </div>
         </div>
