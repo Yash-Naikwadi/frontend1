@@ -1,4 +1,4 @@
-import { Plus, X, Loader2, ShieldCheck, AlertTriangle } from "lucide-react";
+import { Plus, X, Loader2, ShieldCheck, AlertTriangle, Users } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { useMediChain } from "../context/BlockChainContext";
 import { ethers } from "ethers";

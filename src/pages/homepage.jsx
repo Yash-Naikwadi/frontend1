@@ -17,8 +17,8 @@ function Homepage(){
 
   return (
     <div>
-      <Navbar/>
-      {/* <MediChainChatbot/> */}
+      <div className="relative z-[100]"><Navbar /></div>
+      <MediChainChatbot/>
       <HeroSection userType={userType} />
       <FeaturesGrid userType={userType} />
       <StatsSection userType={userType} />

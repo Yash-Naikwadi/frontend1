@@ -12,7 +12,9 @@ import {
   Calendar, 
   MapPin, 
   Activity,
-  Loader2
+  Loader2,
+  CheckCircle,
+  Key
 } from "lucide-react";
 import { Button } from "./button";
 

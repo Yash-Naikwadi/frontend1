@@ -63,7 +63,7 @@ const PatientDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans selection:bg-primary-100 selection:text-primary-900 overflow-x-hidden">
-      <Navbar />
+      <div className="relative z-[100]"><Navbar /></div>
       
       <div className="flex">
         <main className="flex-grow max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 py-16 relative z-10">
@@ -99,7 +99,7 @@ const PatientDashboard = () => {
             </div>
           </header>
           
-          <div className="sticky top-6 z-40 bg-[#F8FAFC]/80 backdrop-blur-xl py-4 -mx-2 px-2 rounded-[2.5rem] mb-12">
+          <div className="sticky top-[88px] z-40 bg-[#F8FAFC]/80 backdrop-blur-xl py-4 -mx-2 px-2 rounded-[2.5rem] mb-12">
             <div className="bg-white/50 p-2 rounded-[2.5rem] shadow-xl shadow-gray-200/20 border border-white/50">
               <NavigationTabs activeTab={activeTab} setActiveTab={setActiveTab} />
             </div>
