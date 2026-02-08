@@ -36,10 +36,13 @@ const SymptomChecker = () => {
 
       const data = await response.json();
 
-      if (data.gen_ai_analysis) {
+      // Check for both possible response structures
+      const genAiData = data.gen_ai_analysis || data.analysis;
+      
+      if (genAiData) {
         // Combine ML predictions into the analysis object for display
         const combinedAnalysis = {
-          ...data.gen_ai_analysis,
+          ...genAiData,
           ml_prediction: data.ml_predictions?.final_prediction,
           ml_details: data.ml_predictions
         };
