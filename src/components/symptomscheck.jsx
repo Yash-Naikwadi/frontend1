@@ -36,8 +36,14 @@ const SymptomChecker = () => {
 
       const data = await response.json();
 
-      if (data.analysis) {
-        setAnalysis(data.analysis);
+      if (data.gen_ai_analysis) {
+        // Combine ML predictions into the analysis object for display
+        const combinedAnalysis = {
+          ...data.gen_ai_analysis,
+          ml_prediction: data.ml_predictions?.final_prediction,
+          ml_details: data.ml_predictions
+        };
+        setAnalysis(combinedAnalysis);
       } else {
         throw new Error("No analysis data received");
       }
@@ -168,14 +174,25 @@ const SymptomChecker = () => {
                 </div>
                 <h3 className="text-2xl font-black text-gray-900 tracking-tight">Differential Diagnosis</h3>
               </div>
-              <ul className="space-y-4 relative z-10">
-                {renderListItems(analysis.conditions).map((condition, index) => (
-                  <li key={index} className="flex items-center gap-5 p-5 bg-gray-50/50 rounded-2xl text-gray-700 font-black text-sm border border-gray-100/50 group/item hover:bg-white transition-colors">
-                    <div className="w-3 h-3 bg-warning-400 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)] group-hover/item:scale-125 transition-transform"></div>
-                    {condition}
-                  </li>
-                ))}
-              </ul>
+              
+              {analysis.ml_prediction && (
+                <div className="p-6 bg-primary-50 rounded-2xl border border-primary-100 relative z-10">
+                  <p className="text-[10px] font-black text-primary-600 uppercase tracking-widest mb-2">ML Model Prediction</p>
+                  <p className="text-xl font-black text-primary-900">{analysis.ml_prediction}</p>
+                </div>
+              )}
+
+              <div className="space-y-4 relative z-10">
+                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-2">Gen AI Suggestions</p>
+                <ul className="space-y-4">
+                  {renderListItems(analysis.conditions).map((condition, index) => (
+                    <li key={index} className="flex items-center gap-5 p-5 bg-gray-50/50 rounded-2xl text-gray-700 font-black text-sm border border-gray-100/50 group/item hover:bg-white transition-colors">
+                      <div className="w-3 h-3 bg-warning-400 rounded-full shadow-[0_0_10px_rgba(245,158,11,0.5)] group-hover/item:scale-125 transition-transform"></div>
+                      {condition}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
             <div className="bg-white p-10 rounded-[3rem] border border-gray-100 space-y-8 hover:shadow-2xl hover:border-secondary-100 transition-all duration-500 group relative overflow-hidden">
